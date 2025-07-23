@@ -1,32 +1,43 @@
 #include <stdio.h>
+#include <math.h>
 
-int max(int a, int b) {
-    return (a > b) ? a : b;
-}
-
-int min(int a, int b) {
-    return (a < b) ? a : b;
+int isPrime(int n) {
+    if (n <= 1) {
+        return 0;
+    }
+    if (n == 2) {
+        return 1;
+    }
+    if (n % 2 == 0) {
+        return 0;
+    }
+    for (int i = 3; i <= sqrt(n); i += 2) {
+        if (n % i == 0) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 int main() {
-    int n;
-    scanf("%d", &n);
-
-    int r;
-    if (n > 0) {
-        scanf("%d", &r);
+    int N;
+    if (scanf("%d", &N) != 1) {
+        return 1;
     }
 
-    int min_val = r;
-    int max_profit = -2000000001;
+    int count = 0;
+    int number;
 
-    for (int i = 1; i < n; i++) {
-        scanf("%d", &r);
-        max_profit = max(max_profit, r - min_val);
-        min_val = min(min_val, r);
+    for (int i = 0; i < N; i++) {
+        if (scanf("%d", &number) != 1) {
+            return 1;
+        }
+        if (isPrime(number)) {
+            count++;
+        }
     }
 
-    printf("%d\n", max_profit);
+    printf("%d\n", count);
 
     return 0;
 }
